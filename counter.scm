@@ -1,15 +1,3 @@
-;;; Helpers
-
-(define (loop_ times procedure)
-  (when (> times 0)
-    (procedure)
-    (loop_ (- times 1) procedure)
-    )
-  )
-
-
-;;; Exports
-
 (define (make-meter init-val growth-procedure interval)
   (define val init-val)
   (lambda (method)
@@ -20,10 +8,20 @@
       (set! val new)
       )
     (define (internal-grow runs)
-      (loop_ runs
-             (lambda ()
-               (internal-set-val (growth-procedure val interval)))
-             )
+      (letrec
+          ((loop
+            (lambda (times procedure)
+              (cond ((> times 0)
+                     (procedure)
+                     (loop (- times 1) procedure)
+                     ))
+              )
+            ))
+        (loop runs
+              (lambda ()
+                (internal-set-val (growth-procedure val interval)))
+              )
+        )
       )
     (define (internal-run)
       (internal-grow 1)
