@@ -18,13 +18,35 @@
 
 ;;; Exports
 
-(define (make-meter start growth-procedure interval)
-  (define val start)
-  (lambda (runs)
-    (loop runs
-          (set! val (growth-procedure val interval))
-          )
-    val
+(define (make-meter init-val growth-procedure interval)
+  (define val init-val)
+  (lambda (method)
+    (define (internal-get-val)
+      val
+      )
+    (define (internal-set-val new)
+      (set! val new)
+      )
+    (define (internal-grow runs)
+      (loop runs
+            (internal-set-val (growth-procedure val interval))
+            )
+      )
+    (define (internal-run)
+      (internal-grow 1)
+      val
+      )
+    (define (internal-runs runs)
+      (internal-grow runs)
+      val
+      )
+    (cond
+     ((eq? method 'get)  internal-get-val)
+     ((eq? method 'set)  internal-set-val)
+     ((eq? method 'grow) internal-grow)
+     ((eq? method 'runs) internal-runs)
+     (else               internal-run)
+     )
     )
   )
 

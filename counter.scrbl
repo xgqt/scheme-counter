@@ -69,18 +69,18 @@ With @racketmodname[counter] similar code would look like:
 
 @racketblock[
           (define c (make-counter 0))
-          (c 1)
+          ((c 'run))
           1
-          (c 0)
+          ((c 'get))
           1
-          (c 1)
+          ((c 'runs) 1)
           2
-          (c 0)
+          ((c 'runs) 0)
           2
           ]
 
 Benefits of using @racket[make-counter] over @racket[set!] are less code
-(which is more DRY).
+(which is also more DRY).
 Also the number of times the growth-procedure is ran can be specified.
 If the number of runs is zero or less only the value of the counter
 is returned.
@@ -91,15 +91,15 @@ is returned.
 
 @subsection{make-meter}
 
-@defproc[(make-meter [start number?]
+@defproc[(make-meter [init-val number?]
                      [growth-procedure procedure?]
                      [interval number?])
          procedure?
          ]{
-           Returns a new function which when called will execute
-           growth-procedure on the start value
-           and interval repacing the start value with new value
-           and return the new value.
+           Returns a new closure function which when called with 'run
+           will execute growth-procedure on val (initially val = init-val)
+           and interval replacing val with new value and,
+           then return that new value.
            }
 
 Example: starting value is 1 and then it is
@@ -128,18 +128,36 @@ increased by 1 on each call.
              ]
 
 
-@subsection{produced closure}
+@section{Examples}
 
-@defproc[(counter [runs number?])
-         number?
-         ]{
-           The closure produced by @racket[make-meter] or @racket[make-counter]
-           takes exactly one number argument - runs.
-           }
+Make an new counter c
+@racketblock[(define c (make-counter 0))]
 
-If runs is greater than 0, then value of closure is increased
-(using growth-procedure given when defining a given counter)
-that many times.
-If runs is equal or less than 0 value of closure is not increased.
+Check type of c
+@racketblock[(procedure? c)]
+> #t
 
-Also on each call to the closure value of it is returned.
+Check type of (c 'run)
+@racketblock[(procedure? (c 'run))]
+> #t
+
+Execute (c 'run) function
+@racketblock[((c 'run))]
+> 1
+
+Execute (c 'runs) function two times
+@racketblock[((c 'runs) 2)]
+> 3
+
+To execute (c 'run) any argument may be passed to c
+@racketblock[((c #t))]
+> 4
+
+Some more OOP - set the value inside c closure to 99
+@racketblock[((c 'set) 99)]
+
+And check the value
+@racketblock[((c 'get))]
+> 99
+
+Also check out "test.rkt" included in this project.
