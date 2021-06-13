@@ -96,8 +96,45 @@ is returned.
                      [interval number?])
          procedure?]
 
+Returns a new function which when called will execute growth-procedure
+on the start value and interval repacing the start value with new value
+and return the new value.
+
+Example: starting value is 1 and then it is
+multipled by 2 on each call.
+
+@racketblock[
+             (define m (make-meter 1 * 2))
+             ]
+
 
 @subsection{make-counter}
 
 @defproc[(make-counter [start number?])
          procedure?]
+
+Uses @racket[make-meter] to create a function which uses @racket[+]
+as growth-procedure and has interval equal to 1.
+
+Example: starting value is 0 and then it is
+increased by 1 on each call.
+
+@racketblock[
+             (define c (make-counter 0))
+             ]
+
+
+@subsection{produced closure}
+
+@defproc[(counter [runs number?])
+         number?]
+
+The closure produced by @racket[make-meter] or @racket[make-counter]
+takes exactly one number argument - runs.
+
+If runs is greater than 0, then value of closure is increased
+(using growth-procedure given when defining a given counter)
+that many times.
+If runs is equal or less than 0 value of closure is not increased.
+
+Also on each call to the closure value of it is returned.
