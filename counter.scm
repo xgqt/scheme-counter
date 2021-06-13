@@ -7,14 +7,6 @@
     )
   )
 
-;; Wrapper for loop_ - do not have to write (lambda () ...)
-(define-syntax loop
-  (syntax-rules ()
-    ((_ times procedure)
-     (loop_ times (lambda () procedure)))
-    )
-  )
-
 
 ;;; Exports
 
@@ -28,9 +20,10 @@
       (set! val new)
       )
     (define (internal-grow runs)
-      (loop runs
-            (internal-set-val (growth-procedure val interval))
-            )
+      (loop_ runs
+             (lambda ()
+               (internal-set-val (growth-procedure val interval)))
+             )
       )
     (define (internal-run)
       (internal-grow 1)
