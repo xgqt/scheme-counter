@@ -56,28 +56,28 @@ As described previously a simple @racket[set!] can be used
 to manage "counters" in a similar fashion.
 
 @racketblock[
-          (define c 0)
-          (set! c (+ c 1))
-          c
-          1
-          (set! c (+ c 1))
-          c
-          2
-          ]
+             (define c 0)
+             (set! c (+ c 1))
+             c
+             1
+             (set! c (+ c 1))
+             c
+             2
+             ]
 
 With @racketmodname[counter] similar code would look like:
 
 @racketblock[
-          (define c (make-counter 0))
-          ((c 'run))
-          1
-          ((c 'get))
-          1
-          ((c 'runs) 1)
-          2
-          ((c 'runs) 0)
-          2
-          ]
+             (define c (make-counter 0))
+             ((c 'run))
+             1
+             ((c 'get))
+             1
+             ((c 'runs) 1)
+             2
+             ((c 'runs) 0)
+             2
+             ]
 
 Benefits of using @racket[make-counter] over @racket[set!] are less code
 (which is also more DRY).
