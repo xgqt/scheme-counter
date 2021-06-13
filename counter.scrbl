@@ -14,8 +14,7 @@
 
 @title{Counter}
 
-@author[@author+email["Maciej Barć"
-                      "xgqt@riseup.net"]]
+@author[@author+email["Maciej Barć" "xgqt@riseup.net"]]
 
 
 @section{About}
@@ -71,9 +70,11 @@ With @racketmodname[counter] similar code would look like:
 @racketblock[
           (define c (make-counter 0))
           (c 1)
+          1
           (c 0)
           1
           (c 1)
+          2
           (c 0)
           2
           ]
