@@ -1,6 +1,6 @@
 # Scheme Counter
 
-Small counter closure to use for console output, logging, etc.
+Small counter library to use for console output, logging, etc.
 
 
 # About
