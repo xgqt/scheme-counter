@@ -8,13 +8,15 @@
                     racket/base
                     "main.rkt"
                     ]
-         scribble/example
          ]
 
 
 @title[#:tag "counter"]{Counter}
 
 @author[@author+email["Maciej Barć" "xgqt@riseup.net"]]
+
+
+@table-of-contents[]
 
 
 @section{About}
@@ -35,7 +37,8 @@ The core library is written in pure scheme and can be utilized by
 probably most scheme implamentations.
 
 Know limitations are that the counter can only count up.
-To have a more freeform way use structs, objects, @racket[make-parameter]
+To have a more freeform way use
+@racket[struct]s, objects, @racket[make-parameter]
 or just utilize @racket[set!].
 
 
