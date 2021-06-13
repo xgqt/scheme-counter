@@ -9,7 +9,8 @@
 (define compile-omit-paths '("counter.scm" ))
 (define test-omit-paths
   '(
-    "counter.scm" "counter.scrbl"
+    "counter.scm" "main.scm"
+    "counter.scrbl"
     )
   )
 
