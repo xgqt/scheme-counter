@@ -3,12 +3,9 @@
 
 #lang scribble/manual
 
-@require[
-         @for-label[
-                    racket/base
-                    "main.rkt"
-                    ]
-         ]
+@require[@for-label["main.rkt"]]
+
+@declare-exporting["main.rkt"]
 
 
 @title[#:tag "counter"]{Counter}
