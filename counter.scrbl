@@ -3,9 +3,9 @@
 
 #lang scribble/manual
 
-@require[@for-label["main.rkt"]]
+@require[@for-label[counter]]
 
-@declare-exporting["main.rkt"]
+@declare-exporting[counter]
 
 
 @title[#:tag "counter"]{Counter}
@@ -88,9 +88,6 @@ is returned.
 
 @section{Exported functions}
 
-
-@subsection{make-meter}
-
 @defproc[(make-meter [init-val number?]
                      [growth-procedure procedure?]
                      [interval number?])
@@ -108,9 +105,6 @@ multipled by 2 on each call.
 @racketblock[
              (define m (make-meter 1 * 2))
              ]
-
-
-@subsection{make-counter}
 
 @defproc[(make-counter [start number?])
          procedure?
