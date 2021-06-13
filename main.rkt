@@ -4,6 +4,7 @@
 #lang racket/base
 
 (require
+ racket/contract
  racket/include
  )
 
@@ -12,6 +13,8 @@
  )
 
 (provide
- make-meter
- make-counter
+ (contract-out [make-meter
+                (-> number? procedure? number? procedure?)])
+ (contract-out [make-counter
+                (-> number? procedure?)])
  )
