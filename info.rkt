@@ -6,7 +6,9 @@
 
 (define collection "counter")
 
-(define compile-omit-paths '("counter.scm" ))
+(define compile-omit-paths
+  '("counter.scm" "main.scm")
+  )
 (define test-omit-paths
   '(
     "counter.scm" "main.scm"
