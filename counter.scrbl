@@ -12,7 +12,7 @@
          ]
 
 
-@title{Counter}
+@title[#:tag "counter"]{Counter}
 
 @author[@author+email["Maciej Barć" "xgqt@riseup.net"]]
 
@@ -94,11 +94,13 @@ is returned.
 @defproc[(make-meter [start number?]
                      [growth-procedure procedure?]
                      [interval number?])
-         procedure?]
-
-Returns a new function which when called will execute growth-procedure
-on the start value and interval repacing the start value with new value
-and return the new value.
+         procedure?
+         ]{
+           Returns a new function which when called will execute
+           growth-procedure on the start value
+           and interval repacing the start value with new value
+           and return the new value.
+           }
 
 Example: starting value is 1 and then it is
 multipled by 2 on each call.
@@ -111,10 +113,12 @@ multipled by 2 on each call.
 @subsection{make-counter}
 
 @defproc[(make-counter [start number?])
-         procedure?]
-
-Uses @racket[make-meter] to create a function which uses @racket[+]
-as growth-procedure and has interval equal to 1.
+         procedure?
+         ]{
+           Uses @racket[make-meter] to create a function
+           which uses @racket[+] as growth-procedure
+           and has interval equal to 1.
+           }
 
 Example: starting value is 0 and then it is
 increased by 1 on each call.
@@ -127,10 +131,11 @@ increased by 1 on each call.
 @subsection{produced closure}
 
 @defproc[(counter [runs number?])
-         number?]
-
-The closure produced by @racket[make-meter] or @racket[make-counter]
-takes exactly one number argument - runs.
+         number?
+         ]{
+           The closure produced by @racket[make-meter] or @racket[make-counter]
+           takes exactly one number argument - runs.
+           }
 
 If runs is greater than 0, then value of closure is increased
 (using growth-procedure given when defining a given counter)
