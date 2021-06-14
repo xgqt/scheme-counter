@@ -154,4 +154,7 @@ And check the value
 @racketblock[((c 'get))]
 > 99
 
-Also check out "test.rkt" included in this project.
+Also check out
+@link["https://gitlab.com/xgqt/scheme-counter/-/blob/master/tests.rkt"
+      "tests.rkt"]
+included in this project.
