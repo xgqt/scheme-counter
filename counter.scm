@@ -1,11 +1,23 @@
-(define (make-meter init-val growth-procedure interval)
-  (define val init-val)
+(define (make-meter init-val init-growth-procedure init-interval)
+  (define val              init-val)
+  (define growth-procedure init-growth-procedure)
+  (define interval         init-interval)
   (lambda (method)
-    (define (internal-get-val)
-      val
+    (define (internal-get var)
+      (case var
+        ((val)              val)
+        ((growth-procedure) growth-procedure)
+        ((interval)         interval)
+        (else               #f)
+        )
       )
-    (define (internal-set-val new)
-      (set! val new)
+    (define (internal-set var new)
+      (case var
+        ((val)              (set! val              new))
+        ((growth-procedure) (set! growth-procedure new))
+        ((interval)         (set! interval         new))
+        (else               #f)
+        )
       )
     (define (internal-grow runs)
       (letrec
@@ -19,7 +31,7 @@
             ))
         (loop runs
               (lambda ()
-                (internal-set-val (growth-procedure val interval)))
+                (internal-set 'val (growth-procedure val interval)))
               )
         )
       )
@@ -32,8 +44,8 @@
       val
       )
     (cond
-     ((eq? method 'get)  internal-get-val)
-     ((eq? method 'set)  internal-set-val)
+     ((eq? method 'get)  internal-get)
+     ((eq? method 'set)  internal-set)
      ((eq? method 'grow) internal-grow)
      ((eq? method 'runs) internal-runs)
      (else               internal-run)

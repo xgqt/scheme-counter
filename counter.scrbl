@@ -23,8 +23,9 @@
 
 @defmodule[counter]
 
-@racketmodname[counter] is a very simple library providing two functions
-for creating closures: @racket[make-meter] & @racket[make-counter].
+@racketmodname[counter] is a very simple OOP-like library
+providing two functions for creating simple "counter" closures:
+@racket[make-meter] & @racket[make-counter].
 
 Those functions can be utilized for logging,
 for debugging output of console applications
@@ -71,7 +72,7 @@ With @racketmodname[counter] similar code would look like:
              (define c (make-counter 0))
              ((c 'run))
              1
-             ((c 'get))
+             ((c 'get) 'val)
              1
              ((c 'runs) 1)
              2
@@ -148,10 +149,10 @@ To execute (c 'run) any argument may be passed to c
 > 4
 
 Some more OOP - set the value inside c closure to 99
-@racketblock[((c 'set) 99)]
+@racketblock[((c 'set) 'val 99)]
 
 And check the value
-@racketblock[((c 'get))]
+@racketblock[((c 'get) 'val)]
 > 99
 
 Also check out
