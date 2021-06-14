@@ -19,6 +19,24 @@ And the one that would count by increasing by one
 will be named `make-counter`.
 
 
+# Documentation
+
+Counter's documentation is written in Scribble,
+to compile the docs you will need
+[Racket](https://racket-lang.org/) installed.
+
+After you have installed Racket,
+install this package using `raco` (as described [below](#racket))
+and then run:
+
+```sh
+mkdir -p doc/html
+raco scribble ++main-xref-in --html --dest ./doc/html counter.scrbl
+```
+
+HTML docs can then be found in [doc/html](./doc/html) directory.
+
+
 # Installation
 
 ## Racket
