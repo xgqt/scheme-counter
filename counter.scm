@@ -43,13 +43,13 @@
       (internal-grow runs)
       val
       )
-    (cond
-     ((eq? method 'get)  internal-get)
-     ((eq? method 'set)  internal-set)
-     ((eq? method 'grow) internal-grow)
-     ((eq? method 'runs) internal-runs)
-     (else               internal-run)
-     )
+    (case method
+      ((get)  internal-get)
+      ((set)  internal-set)
+      ((grow) internal-grow)
+      ((runs) internal-runs)
+      (else   internal-run)
+      )
     )
   )
 
