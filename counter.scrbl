@@ -90,8 +90,8 @@ is returned.
 @section{Exported functions}
 
 @defproc[(make-meter [init-val number?]
-                     [growth-procedure procedure?]
-                     [interval number?])
+                     [init-growth-procedure procedure?]
+                     [init-interval number?])
          procedure?
          ]{
            Returns a new closure function which when called with 'run
