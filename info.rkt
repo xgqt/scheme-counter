@@ -19,7 +19,7 @@
 (define scribblings
   '((
      "counter.scrbl"
-     ()
+     () (library) "counter"
      ))
   )
 
