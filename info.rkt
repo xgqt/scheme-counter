@@ -18,7 +18,7 @@
 
 (define scribblings
   '((
-     "counter.scrbl"
+     "scribblings/counter.scrbl"
      () (library) "counter"
      ))
   )
