@@ -9,7 +9,7 @@
            (loop (- times 1) procedure)
            ))
     )
-  (lambda (method)
+  (lambda method
     (define (internal-get var)
       ;; return the value of VAR
       (case var
@@ -46,14 +46,19 @@
       (internal-turn)
       val
       )
-    (case method
-      ((get)  internal-get)
-      ((set)  internal-set)
-      ((turn) internal-turn)
-      ((grow) internal-grow)
-      ((runs) internal-runs)
-      (else   internal-run)
-      )
+    (if (null? method)
+        ;; ((mycounter))
+        internal-run
+        ;; ((mycounter 'something))
+        (case (car method)
+          ((get)  internal-get)
+          ((set)  internal-set)
+          ((turn) internal-turn)
+          ((grow) internal-grow)
+          ((runs) internal-runs)
+          (else   internal-run)
+          )
+        )
     )
   )
 
