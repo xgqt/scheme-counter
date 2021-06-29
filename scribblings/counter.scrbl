@@ -70,13 +70,13 @@ With @racketmodname[counter] similar code would look like:
 
 @racketblock[
              (define c (make-counter 0))
-             ((c 'run))
+             (c 'run)
              1
-             ((c 'get) 'val)
+             (c 'get 'val)
              1
-             ((c 'runs) 1)
+             (c 'runs 1)
              2
-             ((c 'runs) 0)
+             (c 'runs 0)
              2
              ]
 
@@ -134,25 +134,25 @@ Check type of c
 
 Check type of (c 'run)
 @racketblock[(procedure? (c 'run))]
-> #t
+> #f
 
 Execute (c 'run) function
 @racketblock[((c 'run))]
 > 1
 
 Execute (c 'runs) function two times
-@racketblock[((c 'runs) 2)]
+@racketblock[(c 'runs 2)]
 > 3
 
 To execute (c 'run) any argument may be passed to c
-@racketblock[((c #t))]
+@racketblock[(c #t)]
 > 4
 
 Some more OOP - set the value inside c closure to 99
-@racketblock[((c 'set) 'val 99)]
+@racketblock[(c 'set 'val 99)]
 
 And check the value
-@racketblock[((c 'get) 'val)]
+@racketblock[(c 'get 'val)]
 > 99
 
 Also check out

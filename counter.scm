@@ -9,54 +9,60 @@
            (loop (- times 1) procedure)
            ))
     )
-  (lambda method
-    (define (internal-get var)
-      ;; return the value of VAR
-      (case var
-        ((val)              val)
-        ((growth-procedure) growth-procedure)
-        ((interval)         interval)
-        (else               #f)
-        )
+  (define (second lst)
+    (car (cdr lst))
+    )
+  (define (third lst)
+    (car (cdr (cdr lst)))
+    )
+  (define (internal-get var)
+    ;; return the value of VAR
+    (case var
+      ((val)              val)
+      ((growth-procedure) growth-procedure)
+      ((interval)         interval)
+      (else               #f)
       )
-    (define (internal-set var new)
-      ;; set value of VAR to NEW value
-      (case var
-        ((val)              (set! val              new))
-        ((growth-procedure) (set! growth-procedure new))
-        ((interval)         (set! interval         new))
-        (else               #f)
-        )
+    )
+  (define (internal-set var new)
+    ;; set value of VAR to NEW value
+    (case var
+      ((val)              (set! val              new))
+      ((growth-procedure) (set! growth-procedure new))
+      ((interval)         (set! interval         new))
+      (else               #f)
       )
-    (define (internal-turn)
-      ;; set VAL to result of `growth-procedure' taking VAL and INTERVAL
-      (internal-set 'val (growth-procedure val interval))
-      )
-    (define (internal-grow runs)
-      ;; execute `internal-turn' RUNS times
-      (loop runs (lambda () (internal-turn)))
-      )
-    (define (internal-runs runs)
-      ;; execute `internal-grow' RUNS times and return VAL
-      (internal-grow runs)
-      val
-      )
-    (define (internal-run)
-      ;; execute `internal-turn' once and return VAL
-      (internal-turn)
-      val
-      )
-    (if (null? method)
-        ;; ((mycounter))
-        internal-run
-        ;; ((mycounter 'something))
-        (case (car method)
-          ((get)  internal-get)
-          ((set)  internal-set)
-          ((turn) internal-turn)
-          ((grow) internal-grow)
-          ((runs) internal-runs)
-          (else   internal-run)
+    )
+  (define (internal-turn)
+    ;; set VAL to result of `growth-procedure' taking VAL and INTERVAL
+    (internal-set 'val (growth-procedure val interval))
+    )
+  (define (internal-grow runs)
+    ;; execute `internal-turn' RUNS times
+    (loop runs (lambda () (internal-turn)))
+    )
+  (define (internal-runs runs)
+    ;; execute `internal-grow' RUNS times and return VAL
+    (internal-grow runs)
+    val
+    )
+  (define (internal-run)
+    ;; execute `internal-turn' once and return VAL
+    (internal-turn)
+    val
+    )
+  (lambda args
+    (if (null? args)
+        ;; (mycounter)
+        (internal-run)
+        ;; (mycounter 'something) or (mycounter 'something somevalue)
+        (case (car args)
+          ((get)  (internal-get (second args)))
+          ((set)  (internal-set (second args) (third args)))
+          ((turn) (internal-turn))
+          ((grow) (internal-grow (second args)))
+          ((runs) (internal-runs (second args)))
+          (else   (internal-run))
           )
         )
     )
