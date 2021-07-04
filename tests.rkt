@@ -14,6 +14,8 @@
   (check-true (procedure? (make-counter 0)))
   (check-eq?  ((make-counter 0) #t)       1)
   (check-eq?  ((make-counter 0) 'runs 0)  0)
+  (check-eq?  ((make-counter 0) 'show)  0)
+  (check-eq?  ((make-counter 99) 'show)  99)
 
   (define c0+2 (make-meter 0 + 2))
   (define c1+2 (make-meter 1 + 2))

@@ -59,6 +59,7 @@
         (case (car args)
           ((get)  (internal-get (second args)))
           ((set)  (internal-set (second args) (third args)))
+          ((show) (internal-get 'val))
           ((turn) (internal-turn))
           ((grow) (internal-grow (second args)))
           ((runs) (internal-runs (second args)))
