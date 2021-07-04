@@ -7,18 +7,18 @@
 (define collection "counter")
 
 (define scheme-source   '("counter.scm" "main.scm"))
-(define scribble-source '("counter.scrbl"))
+(define scribble-source "scribblings/counter.scrbl")
 
 (define compile-omit-paths
   scheme-source
   )
 (define test-omit-paths
-  (append scheme-source scribble-source)
+  (append scheme-source `(,scribble-source))
   )
 
 (define scribblings
-  '((
-     "scribblings/counter.scrbl"
+  `((
+     ,scribble-source
      () (library) "counter"
      ))
   )
