@@ -3,18 +3,11 @@
 
 #lang racket/base
 
-(require
- racket/contract
- racket/include
- )
+(require racket/contract racket/include)
 
-(include
- "counter.scm"
- )
+(include "counter.scm")
 
 (provide
- (contract-out [make-meter
-                (-> number? procedure? number? procedure?)])
- (contract-out [make-counter
-                (-> number? procedure?)])
- )
+ (contract-out
+  [make-meter (-> number? procedure? number? procedure?)]
+  [make-counter (-> number? procedure?)]))

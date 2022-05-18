@@ -21,12 +21,8 @@
      () (library) "counter")))
 
 (define deps
-  '(
-    "base"
-    ))
+  '("base"))
 (define build-deps
-  '(
-    "racket-doc"
+  '("racket-doc"
     "rackunit-lib"
-    "scribble-lib"
-    ))
+    "scribble-lib"))
