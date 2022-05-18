@@ -3,7 +3,11 @@
 
 #lang scribble/manual
 
-@require[@for-label[counter]]
+@require[scribble/example @for-label[racket/base counter]]
+
+
+@(define doc-eval
+   (make-base-eval '(require counter)))
 
 @declare-exporting[counter]
 
@@ -56,29 +60,25 @@ Counter is available in Public Domain or under the CC0 License.
 As described previously a simple @racket[set!] can be used
 to manage "counters" in a similar fashion.
 
-@racketblock[
-             (define c 0)
-             (set! c (+ c 1))
-             c
-             1
-             (set! c (+ c 1))
-             c
-             2
-             ]
+@examples[
+#:eval doc-eval
+(define c 0)
+(set! c (+ c 1))
+c
+(set! c (+ c 1))
+c
+]
 
 With @racketmodname[counter] similar code would look like:
 
-@racketblock[
-             (define c (make-counter 0))
-             (c 'run)
-             1
-             (c 'get 'val)
-             1
-             (c 'runs 1)
-             2
-             (c 'runs 0)
-             2
-             ]
+@examples[
+#:eval doc-eval
+(define c (make-counter 0))
+(c 'run)
+(c 'get 'val)
+(c 'runs 1)
+(c 'runs 0)
+]
 
 Benefits of using @racket[make-counter] over @racket[set!] are less code
 (which is also more DRY).
@@ -89,38 +89,35 @@ is returned.
 
 @section{Exported functions}
 
-@defproc[(make-meter [init-val number?]
-                     [init-growth-procedure procedure?]
-                     [init-interval number?])
-         procedure?
-         ]{
-           Returns a new closure function which when called with 'run
-           will execute growth-procedure on val (initially val = init-val)
-           and interval replacing val with new value and,
-           then return that new value.
-           }
+@defproc[
+ (make-meter
+  [init-val number?] [init-growth-procedure procedure?] [init-interval number?])
+ procedure?
+ ]{
+   Returns a new closure function which when called with 'run
+   will execute growth-procedure on val (initially val = init-val)
+   and interval replacing val with new value and,
+   then return that new value.
+   }
 
 Example: starting value is 1 and then it is
 multipled by 2 on each call.
 
-@racketblock[
-             (define m (make-meter 1 * 2))
-             ]
+@racketblock[(define m (make-meter 1 * 2))]
 
-@defproc[(make-counter [start number?])
-         procedure?
-         ]{
-           Uses @racket[make-meter] to create a function
-           which uses @racket[+] as growth-procedure
-           and has interval equal to 1.
-           }
+@defproc[
+ (make-counter [start number?])
+ procedure?
+ ]{
+   Uses @racket[make-meter] to create a function
+   which uses @racket[+] as growth-procedure
+   and has interval equal to 1.
+   }
 
 Example: starting value is 0 and then it is
 increased by 1 on each call.
 
-@racketblock[
-             (define c (make-counter 0))
-             ]
+@racketblock[(define c (make-counter 0))]
 
 
 @section{Examples}
@@ -129,31 +126,50 @@ Make an new counter c
 @racketblock[(define c (make-counter 0))]
 
 Check type of c
-@racketblock[(procedure? c)]
-> #t
+@examples[
+#:eval doc-eval
+(define c (make-counter 0))
+(procedure? c)
+]
 
-Check type of (c 'run)
-@racketblock[(procedure? (c 'run))]
-> #f
+Check type of @racket[(c 'run)]
+@examples[
+#:eval doc-eval
+(define c (make-counter 0))
+(procedure? (c 'run))
+]
 
-Execute (c 'run) function
-@racketblock[((c 'run))]
-> 1
+Execute @racket[(c 'run)] function
+@examples[
+#:eval doc-eval
+(define c (make-counter 0))
+(c 'run)
+]
 
-Execute (c 'runs) function two times
-@racketblock[(c 'runs 2)]
-> 3
+Execute @racket[(c 'runs)] function two times
+@examples[
+#:eval doc-eval
+(define c (make-counter 0))
+(c 'runs 2)
+]
 
-To execute (c 'run) any argument may be passed to c
-@racketblock[(c #t)]
-> 4
+To execute @racket[(c 'run)] any argument may be passed to c
+@examples[
+#:eval doc-eval
+(define c (make-counter 0))
+(c #t)
+]
 
 Some more OOP - set the value inside c closure to 99
 @racketblock[(c 'set 'val 99)]
 
 And check the value
-@racketblock[(c 'get 'val)]
-> 99
+@examples[
+#:eval doc-eval
+(define c (make-counter 0))
+(c 'set 'val 99)
+(c 'get 'val)
+]
 
 Also check out
 @link["https://gitlab.com/xgqt/scheme-counter/-/blob/master/tests.rkt"
