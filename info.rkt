@@ -7,7 +7,7 @@
 (define pkg-authors '(xgqt))
 (define pkg-desc
   "Small counter library to use for console output, logging, etc.")
-(define version "0.0.0")
+(define version "1.0.0")
 
 (define collection "counter")
 (define scheme-source   '("counter.scm" "main.scm"))
