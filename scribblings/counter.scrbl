@@ -69,6 +69,16 @@ c
 c
 ]
 
+@examples[
+#:eval doc-eval
+(define count!
+  (let ([c 0])
+    (lambda () (set! c (+ c 1))
+      c)))
+(count!)
+(count!)
+]
+
 With @racketmodname[counter] similar code would look like:
 
 @examples[
