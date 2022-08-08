@@ -50,5 +50,4 @@
         (c2/2 'runs 1) (c2/2 'runs 2) (c2/2 'runs 3) (c2/2))
   (check-equal?  (c0/2 'get 'val)  0)
   (check-equal?  (c1/2 'get 'val)  (/ 1 128))
-  (check-equal?  (c2/2 'get 'val)  (/ 1 64))
-  )
+  (check-equal?  (c2/2 'get 'val)  (/ 1 64)))

@@ -26,8 +26,7 @@
   (append scheme-source `(,scribble-source)))
 
 (define scribblings
-  `((,scribble-source
-     () (library) "counter")))
+  `((,scribble-source () (library) "counter")))
 
 (define deps
   '("base"))

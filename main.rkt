@@ -7,7 +7,6 @@
 
 (include "counter.scm")
 
-(provide
- (contract-out
-  [make-meter (-> number? procedure? number? procedure?)]
-  [make-counter (-> number? procedure?)]))
+(provide (contract-out
+          [make-meter (-> number? procedure? number? procedure?)]
+          [make-counter (-> number? procedure?)]))
