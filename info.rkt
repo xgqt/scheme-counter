@@ -9,7 +9,7 @@
 (define pkg-desc
   "Small counter library to use for console output, logging, etc.")
 
-(define version "1.0.0")
+(define version "1.0")
 
 (define license 'CC0-1.0)
 
